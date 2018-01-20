@@ -75,4 +75,10 @@ public class Scheduler {
 
 		scan.close();
 	}
+<<<<<<< HEAD
+=======
+	public String getDates(){
+		return(this.dates);	
+	}
+>>>>>>> c9237b50067c27c5b1dd419890e1de1e4f79a1d9
 }
