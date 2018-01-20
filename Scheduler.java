@@ -55,12 +55,22 @@ public class Scheduler {
             sortTTH[3] = D.getCourseName();
 
         for (int i = 0; i < sortMWF.length - 1; i++) {
-            String min = A.getCourseName(), temp;
+            String min, temp;
             for (int j = i + 1; j < sortMWF.length; j++) {
-                if (A.getStartTime()>B.getStartTime())
-                {
+                if (A.getStartTime() > B.getStartTime()) {
                     min = A.getCourseName();
-                    sortMWF[i] = sortMWF[j];
+                    sortMWF[1] = sortMWF[0];
+                    sortMWF[0] = min;
+                }
+                else if (A.getStartTime() > C.getStartTime()) {
+                    min = C.getCourseName();
+                    sortMWF[2] = sortMWF[0];
+                    sortMWF[0] = min;
+                }
+                else {
+                    min = D.getCourseName();
+                    sortMWF[3] = sortMWF[0];
+                    sortMWF[0] = min;
                 }
             }
             temp = sortMWF[i];
@@ -74,23 +84,11 @@ public class Scheduler {
 
         System.out.println("   TTH");
         System.out.println("---------");
-        if (A.getDates().charAt(0) == 'T') {
-            System.out.printf("%d-%d: %s\n", A.getStartTime(), A.getEndTime(), A.getCourseName());
-        }
-        else if (B.getDates().charAt(0) == 'T') {
-            System.out.printf("%d-%d: %s\n", B.getStartTime(), B.getEndTime(), B.getCourseName());
-        }
-        else if (C.getDates().charAt(0) == 'T') {
-            System.out.printf("%d-%d: %s\n", C.getStartTime(), C.getEndTime(), C.getCourseName());
-        }
-        else if (D.getDates().charAt(0) == 'T') {
-            System.out.printf("%d-%d: %s\n", D.getStartTime(), D.getEndTime(), D.getCourseName());
-        }
     }
 
     public static void main(String[] args) {
         String courseName, dates = null;
-        int startTime = 0, endTime = 1, input;
+        int startTime, endTime, input;
         Scanner scan = new Scanner(System.in);
         Course course1 = null;
         Course course2 = null;
