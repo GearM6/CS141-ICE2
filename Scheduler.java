@@ -6,17 +6,32 @@ THIS IS THE DRIVER FILE
 public class Scheduler {
 
 
-	public static void checkInterference (Course A, Course B) {
+	public static void checkInterference (Course A, Course B, Course C, Course D) {
 		if (A.getDates().equals(B.getDates())){
-			if (A.getEndTime() > B.getStartTime())
+			if (A.getEndTime() > B.getStartTime() || B.getEndTime() > A.getStartTime())
 			System.out.println("Course conflict between " + A.getCourseName() + " and " + B.getCourseName() + ".");
 		}
-		/*else if (course1.dates.equals(course3.dates)){
-			if (course1.endTime > course3.endTime)
-			System.out.println("Course conflict between " + course1.getCourseName " and " + course3.getCourseName ".")
-		}*/
+		if (A.getDates().equals(C.getDates())){
+			if (A.getEndTime() > C.getEndTime() || C.getEndTime() > A.getStartTime())
+			System.out.println("Course conflict between " + A.getCourseName() + " and " + C.getCourseName() + ".");
+		}
+		if (A.getDates().equals(D.getDates())){
+			if (A.getEndTime() > D.getEndTime() || D.getEndTime() > A.getStartTime())
+			System.out.println("Course conflict between " + A.getCourseName() + " and " + D.getCourseName() + ".");
+		}
+		if (B.getDates().equals(C.getDates())){
+			if (B.getEndTime() > C.getEndTime() || C.getEndTime() > B.getStartTime())
+			System.out.println("Course conflict between " + B.getCourseName() + " and " + C.getCourseName() + ".");
+		}
+		if (B.getDates().equals(D.getDates())){
+			if (B.getEndTime() > D.getEndTime() || D.getEndTime() > B.getStartTime())
+			System.out.println("Course conflict between " + B.getCourseName() + " and " + D.getCourseName() + ".");
+		}
+		if (C.getDates().equals(D.getDates())){
+			if (C.getEndTime() > D.getEndTime() || D.getEndTime() > C.getStartTime())
+			System.out.println("Course conflict between " + C.getCourseName() + " and " + D.getCourseName() + ".");
+		}
 	}
-	@SuppressWarnings("null")
 	public static void main(String[] args) {
 		String courseName, dates = null;
 		int startTime, endTime, input;
@@ -25,7 +40,7 @@ public class Scheduler {
 		Course course2 = null;
 		Course course3 = null;
 		Course course4 = null;
-		for(int i = 0; i <= 1; i++){
+		for(int i = 0; i <= 3; i++){
 
 		    System.out.print("Please enter the course name: ");
 		    courseName = scan.next();
@@ -67,9 +82,9 @@ public class Scheduler {
 
 
 		}
-		checkInterference(course1, course2);
-		System.out.println(course1.getCourseName());
-		System.out.println(course2.getCourseName());
+		checkInterference(course1, course2, course3, course4);
+		//System.out.println(course1.getCourseName());
+		//System.out.println(course2.getCourseName());
 		//System.out.println(course3.getCourseName());
 		//System.out.println(course4.getCourseName());
 
