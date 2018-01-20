@@ -33,57 +33,143 @@ public class Scheduler {
         }
     }
 
+
     public static void sortSchedule(Course A, Course B, Course C, Course D) {
-        String[] sortMWF = new String[3];
-        String[] sortTTH = new String[3];
+        String[] addMWF = new String[3];
+        String[] addTTH = new String[3];
 
-        if (A.getDates().charAt(0) == 'M')
-            sortMWF[0] = A.getCourseName();
-        else
-            sortTTH[0] = A.getCourseName();
-        if (B.getDates().charAt(0) == 'M')
-            sortMWF[1] = B.getCourseName();
-        else
-            sortTTH[1] = B.getCourseName();
-        if (C.getDates().charAt(0) == 'M')
-            sortMWF[2] = C.getCourseName();
-        else
-            sortTTH[2] = C.getCourseName();
-        if (D.getDates().charAt(0) == 'M')
-            sortMWF[3] = D.getCourseName();
-        else
-            sortTTH[3] = D.getCourseName();
+        int[] startTimeMWF = new int[3];
+        int[] endTimeMWF = new int[3];
+        int[] startTimeTTH = new int[3];
+        int[] endTimeTTH = new int[3];
 
-        for (int i = 0; i < sortMWF.length - 1; i++) {
-            String min, temp;
-            for (int j = i + 1; j < sortMWF.length; j++) {
-                if (A.getStartTime() > B.getStartTime()) {
-                    min = A.getCourseName();
-                    sortMWF[1] = sortMWF[0];
-                    sortMWF[0] = min;
-                }
-                else if (A.getStartTime() > C.getStartTime()) {
-                    min = C.getCourseName();
-                    sortMWF[2] = sortMWF[0];
-                    sortMWF[0] = min;
-                }
-                else {
-                    min = D.getCourseName();
-                    sortMWF[3] = sortMWF[0];
-                    sortMWF[0] = min;
-                }
-            }
-            temp = sortMWF[i];
 
+        if (A.getDates().charAt(0) == 'M') {
+            addMWF[0] = A.getCourseName();
+            startTimeMWF[0] = A.getStartTime();
+            endTimeMWF[0] = A.getEndTime();
         }
+        else {
+            addTTH[0] = A.getCourseName();
+            startTimeTTH[0] = A.getStartTime();
+            endTimeTTH[0] = A.getEndTime();
+        }
+        if (B.getDates().charAt(0) == 'M') {
+            addMWF[1] = B.getCourseName();
+            startTimeMWF[1] = B.getStartTime();
+            endTimeMWF[1] = B.getEndTime();
+        }
+        else {
+            addTTH[1] = B.getCourseName();
+            startTimeTTH[1] = B.getStartTime();
+            endTimeTTH[1] = B.getEndTime();
+        }
+        if (C.getDates().charAt(0) == 'M') {
+            addMWF[2] = C.getCourseName();
+            startTimeMWF[2] = A.getStartTime();
+            endTimeMWF[2] = A.getEndTime();
+        }
+        else {
+            addTTH[2] = C.getCourseName();
+            startTimeTTH[2] = C.getStartTime();
+            endTimeTTH[2] = C.getEndTime();
+        }
+        if (D.getDates().charAt(0) == 'M') {
+            addMWF[3] = D.getCourseName();
+            startTimeMWF[3] = A.getStartTime();
+            endTimeMWF[3] = A.getEndTime();
+        }
+        else {
+            addTTH[3] = D.getCourseName();
+            startTimeTTH[3] = D.getStartTime();
+            endTimeTTH[3] = D.getEndTime();
+        }
+
+        String[] sortedCourseMWF = sortDays(addMWF, A, B, C, D);
+        String[] sortedCourseTTH = sortDays(addTTH, A, B, C, D);
+
+        int[] sortedStartTimeMWF = sortTime(startTimeMWF);
+        int[] sortedEndTimeMWF = sortTime(endTimeMWF);
+        int[] sortedStartTimeTTH = sortTime(startTimeTTH);
+        int[] sortedEndTimeTTH = sortTime(endTimeTTH);
 
         System.out.println("   MWF");
         System.out.println("---------");
-
+        for (int i = 0; i < addMWF.length - 1; i++) {
+            System.out.printf("%s: %2d-%d", sortedCourseMWF[i], sortedStartTimeMWF[i], sortedEndTimeMWF[i]);
+        }
         System.out.println();
 
         System.out.println("   TTH");
         System.out.println("---------");
+        for (int i = 0; i < addTTH.length - 1; i++) {
+            System.out.printf("%s: %2d-%d", sortedCourseTTH[i], sortedStartTimeTTH[i], sortedEndTimeTTH[i]);
+        }
+    }
+
+    public static String[] sortDays(String[] a, Course A, Course B, Course C, Course D) {
+        String min;
+        if (A.getStartTime() < D.getStartTime()) {
+            min = B.getCourseName();
+            a[1] = a[0];
+            a[0] = min;
+            if (A.getStartTime() > C.getStartTime()) {
+                min = C.getCourseName();
+                a[2] = a[1];
+                a[1] = min;
+                if (A.getStartTime() > D.getStartTime()) {
+                    min = D.getCourseName();
+                    a[3] = a[2];
+                    a[2] = min;
+                }
+            }
+            else if (A.getStartTime() > D.getStartTime()) {
+                min = D.getCourseName();
+                a[3] = a[1];
+                a[1] = min;
+            }
+        }
+        else if (A.getStartTime() > C.getStartTime()) {
+            min = C.getCourseName();
+            a[2] = a[0];
+            a[0] = min;
+            if (A.getStartTime() > D.getStartTime()) {
+                min = D.getCourseName();
+                a[3] = a[2];
+                a[2] = min;
+            }
+        }
+        else if (A.getStartTime() > D.getStartTime()) {
+            min = D.getCourseName();
+            a[3] = a[0];
+            a[0] = min;
+        }
+        else if (B.getStartTime() > C.getStartTime()) {
+            min = C.getCourseName();
+            a[2] = a[1];
+            a[1] = min;
+            if (B.getStartTime() > D.getStartTime()) {
+                min = D.getCourseName();
+                a[3] = a[2];
+                a[2] = min;
+            }
+        }
+    }
+}
+
+    public static int[] sortTime(int[] a) {
+        for (int i = 0; i < a.length - 1; i++) {
+            int min = 0, temp;
+            for (int j = i + 1; i < a.length; j++) {
+                if (a[i] > a[j]) {
+                    min = j;
+                }
+                temp = a[min];
+                a[min] = a[i];
+                a[i] = temp;
+            }
+        }
+        return a;
     }
 
     public static void main(String[] args) {
