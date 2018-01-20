@@ -85,8 +85,8 @@ public class Scheduler {
             endTimeTTH[3] = D.getEndTime();
         }
 
-        String[] sortedCourseMWF = sortDays(addMWF, A, B, C, D);
-        String[] sortedCourseTTH = sortDays(addTTH, A, B, C, D);
+        String[] sortedCourseMWF = sortCourses(addMWF, A, B, C, D);
+        String[] sortedCourseTTH = sortCourses(addTTH, A, B, C, D);
 
         int[] sortedStartTimeMWF = sortTime(startTimeMWF);
         int[] sortedEndTimeMWF = sortTime(endTimeMWF);
@@ -107,7 +107,7 @@ public class Scheduler {
         }
     }
 
-    public static String[] sortDays(String[] a, Course A, Course B, Course C, Course D) {
+    public static String[] sortCourses(String[] a, Course A, Course B, Course C, Course D) {
         String min;
         if (A.getStartTime() < D.getStartTime()) {
             min = B.getCourseName();
