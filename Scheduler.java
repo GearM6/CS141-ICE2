@@ -154,9 +154,13 @@ public class Scheduler {
                 a[2] = min;
             }
         }
+        else if (C.getStartTime() > D.getStartTime()) {
+            min = D.getCourseName();
+            a[2] = a[3];
+            a[3] = min;
+        }
+        return a;
     }
-}
-
     public static int[] sortTime(int[] a) {
         for (int i = 0; i < a.length - 1; i++) {
             int min = 0, temp;
