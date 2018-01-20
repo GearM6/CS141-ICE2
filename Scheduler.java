@@ -33,39 +33,6 @@ public class Scheduler {
         }
     }
 
-    public static void sortSchedule(Course A, Course B, Course C, Course D) {
-        System.out.println("   MWF");
-        System.out.println("---------");
-        if (A.getDates().charAt(0) == 'M') {
-            System.out.printf("%d-%d: %s\n", A.getStartTime(), A.getEndTime(), A.getCourseName());
-        }
-        else if (B.getDates().charAt(0) == 'M') {
-            System.out.printf("%d-%d: %s\n", B.getStartTime(), B.getEndTime(), B.getCourseName());
-        }
-        else if (C.getDates().charAt(0) == 'M') {
-            System.out.printf("%d-%d: %s\n", C.getStartTime(), C.getEndTime(), C.getCourseName());
-        }
-        else if (D.getDates().charAt(0) == 'M') {
-            System.out.printf("%d-%d: %s\n", D.getStartTime(), D.getEndTime(), D.getCourseName());
-        }
-        System.out.println();
-
-        System.out.println("   TTH");
-        System.out.println("---------");
-        if (A.getDates().charAt(0) == 'T') {
-            System.out.printf("%d-%d: %s\n", A.getStartTime(), A.getEndTime(), A.getCourseName());
-        }
-        else if (B.getDates().charAt(0) == 'T') {
-            System.out.printf("%d-%d: %s\n", B.getStartTime(), B.getEndTime(), B.getCourseName());
-        }
-        else if (C.getDates().charAt(0) == 'T') {
-            System.out.printf("%d-%d: %s\n", C.getStartTime(), C.getEndTime(), C.getCourseName());
-        }
-        else if (D.getDates().charAt(0) == 'T') {
-            System.out.printf("%d-%d: %s\n", D.getStartTime(), D.getEndTime(), D.getCourseName());
-        }
-    }
-
     public static void main(String[] args) {
         String courseName, dates = null;
         int startTime = 1, endTime = 0, input;
@@ -132,7 +99,6 @@ public class Scheduler {
         }
 
         checkInterference(course1, course2, course3, course4);
-        sortSchedule(course1, course2, course3, course4);
 
         scan.close();
     }
