@@ -1,84 +1,48 @@
-import java.util.*;
+public class Course {
+	private String courseName, dates;
+	private int startTime, endTime; // Endtime cannot be lower than starttime
 
-/*
-THIS IS THE DRIVER FILE
-*/
-public class Scheduler {
-
-
-	public static void checkInterference (Course A, Course B) {
-		if (A.getDates().equals(B.getDates())){
-			if (A.getEndTime() > B.getStartTime())
-			System.out.println("Course conflict between " + A.getCourseName() + " and " + B.getCourseName() + ".");
-		}
-		/*else if (course1.dates.equals(course3.dates)){
-			if (course1.endTime > course3.endTime)
-			System.out.println("Course conflict between " + course1.getCourseName " and " + course3.getCourseName ".")
-		}*/
+	public Course() {
+		this.courseName = "UNDEFINED";
+		this.dates = "UNDEFINED";
+		this.startTime = 0;
+		this.endTime = 1;
 	}
-	@SuppressWarnings("null")
-	public static void main(String[] args) {
-		String courseName, dates = null;
-		int startTime, endTime, input;
-		Scanner scan = new Scanner(System.in);
-		Course course1 = null;
-		Course course2 = null;
-		Course course3 = null;
-		Course course4 = null;
-		for(int i = 0; i <= 1; i++){
 
-		    System.out.print("Please enter the course name: ");
-		    courseName = scan.next();
-
-				while (true) {
-					System.out.print("Please enter 1 for MWF or 2 for TTH meeting days: ");
-					input = scan.nextInt();
-					switch(input)
-					{
-						case 1:
-							dates = "MWF";
-							System.out.println("Date set to MWF");
-							break;
-						case 2:
-							dates = "TTH";
-							break;
-						default:
-							System.out.println("Please enter 1 or 2!");
-					}
-					if (input == 1 || input == 2)
-						break;
-				}
-
-
-		  System.out.print("Please enter the start time (0-24): ");
-		  startTime = scan.nextInt();
-
-			System.out.print("Please enter the end time (0-24): ");
-		  endTime = scan.nextInt();
-
-			if (i == 0)
-				course1 = new Course(courseName, dates, startTime, endTime);
-			else if (i == 1)
-				course2 = new Course(courseName, dates, startTime, endTime);
-			else if (i == 2)
-				course3 = new Course(courseName, dates, startTime, endTime);
-			else if (i == 2)
-				course4 = new Course(courseName, dates, startTime, endTime);
-
-
-		}
-		checkInterference(course1, course2);
-		System.out.println(course1.getCourseName());
-		System.out.println(course2.getCourseName());
-		//System.out.println(course3.getCourseName());
-		//System.out.println(course4.getCourseName());
-
-		scan.close();
+	public Course(String courseName, String dates, int startTime, int endTime) {
+		this.courseName = courseName;
+		this.dates = dates;
+		this.startTime = startTime;
+		this.endTime = endTime;
 	}
-<<<<<<< HEAD
-=======
+
+	//MODIFIERS
+	public void setStartTime(int newTime){
+		this.startTime = newTime;
+	}
+	public void setEndTime(int newTime){
+		this.endTime = newTime;
+	}
+	public void setCourseName(String courseName){
+		this.courseName = courseName;
+	}
+	public void setDates(String dates){
+		this.dates = dates;
+	}
+
+	//ACCESSORS
+	public int getStartTime(){
+		return this.startTime;
+	}
+	public int getEndTime(){
+		return this.endTime;
+	}
+	public String getCourseName(){
+		return this.courseName;
+	}
 	public String getDates(){
-		return(this.dates);	
+		/*if(this.dates.equals(1)){return("M,W,F");}
+		else {return("T,TH");}*/
+		return this.dates;
 	}
->>>>>>> c9237b50067c27c5b1dd419890e1de1e4f79a1d9
 }
