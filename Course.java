@@ -44,4 +44,7 @@ public class Course {
 		if(this.dates.equals(1)){return("M,W,F");}
 		else {return("T,TH");}
 	}
+	public String getDates(){
+		return(this.dates);	
+	}
 }
