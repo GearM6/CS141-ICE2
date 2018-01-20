@@ -40,8 +40,9 @@ public class Course {
 	public String getCourseName(){
 		return this.courseName;
 	}
-	public String getDatesVerbose(){
-		if(this.dates.equals(1)){return("M,W,F");}
-		else {return("T,TH");}
+	public String getDates(){
+		/*if(this.dates.equals(1)){return("M,W,F");}
+		else {return("T,TH");}*/
+		return this.dates;
 	}
 }
